@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06294b">
+<title>Eleições Brasileiras 2026</title>
+<style>
+:root{--nav:#06294b;--nav2:#0b3a68;--blue:#1262a8;--gold:#caa34a;--bg:#eef2f5;--card:#fff;--ink:#172533;--muted:#667787;--line:#d7e0e7;--ok:#167447;--red:#a52b2b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.gov{background:#041d35;color:#dbe8f5;font-size:11px;padding:7px 0}.wrap{max-width:1200px;margin:auto;padding:0 18px}.gov .wrap{display:flex;justify-content:space-between}
+.head{background:#fff;border-bottom:1px solid var(--line)}.headin{min-height:92px;display:flex;align-items:center;gap:15px}
+.seal{width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--nav);font-weight:900;font-size:18px}
+h1{margin:0;color:var(--nav);font-size:25px}.subtitle{margin-top:4px;color:var(--muted);font-size:12px}
+.live{margin-left:auto;border:1px solid #cdd9e3;border-radius:20px;padding:8px 12px;color:var(--ok);font-weight:700;font-size:11px}.live i{display:inline-block;width:7px;height:7px;background:#20a260;border-radius:50%;margin-right:6px}
+.nav{background:var(--nav2)}.navin{display:flex;overflow:auto}.tab{background:transparent;border:0;color:#dbe9f7;padding:14px 18px;border-bottom:3px solid transparent;font-weight:700;white-space:nowrap;cursor:pointer}.tab.active{background:#0e477b;border-bottom-color:var(--gold)}
+main{padding:20px 0 34px}.toprow{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap}.toprow h2{margin:0;color:var(--nav);font-size:21px}.toprow p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.controls{display:flex;gap:7px}select,button{height:38px;border:1px solid #c9d4de;background:#fff;border-radius:5px;padding:0 10px;color:var(--ink)}button{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:700;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:0 2px 8px #16324a0d}.metric{padding:14px}.metric .label{text-transform:uppercase;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.5px}.metric .num{font-size:23px;font-weight:800;color:var(--nav);margin-top:6px}.metric .sub{font-size:10px;color:var(--muted);margin-top:3px}
+.layout{display:grid;grid-template-columns:390px 1fr;gap:14px}.panel{padding:16px}.panel h3{margin:0;color:var(--nav);font-size:16px}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.mapbox{background:#f7f9fb;border:1px solid var(--line);border-radius:6px;padding:10px}.map{position:relative;height:420px;background:linear-gradient(150deg,#f8fafc,#edf3f7);border-radius:5px;overflow:hidden}
+.brazil{position:absolute;left:25px;right:25px;top:35px;bottom:25px;background:#e5edf3;clip-path:polygon(20% 7%,35% 2%,50% 7%,62% 17%,75% 16%,91% 29%,85% 42%,94% 55%,79% 62%,77% 78%,65% 72%,57% 91%,44% 83%,35% 96%,28% 79%,15% 74%,20% 59%,7% 49%,15% 35%,8% 22%);border:2px solid #c8d5df}
+.state{position:absolute;transform:translate(-50%,-50%);border:1px solid #b8c8d4;background:#fff;color:#143b5b;border-radius:4px;padding:4px 5px;font-size:9px;font-weight:800;cursor:pointer;box-shadow:0 1px 3px #0001}.state:hover,.state.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.legend{font-size:10px;color:var(--muted);margin-top:8px}
+.resulthead{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}.badge{font-size:10px;background:#edf6f0;color:var(--ok);padding:5px 7px;border-radius:4px;font-weight:800}
+table{width:100%;border-collapse:collapse}th{font-size:9px;text-transform:uppercase;color:var(--muted);padding:8px 5px;text-align:left;border-bottom:1px solid var(--line)}td{padding:10px 5px;border-bottom:1px solid #edf0f2;font-size:12px}td.r,th.r{text-align:right}.name{font-weight:800}.party{display:block;color:var(--muted);font-size:9px;margin-top:2px}.bar{height:5px;background:#e8edf1;border-radius:5px;margin-top:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}
+.notice{margin:14px 0;padding:11px 13px;background:#fffdf4;border:1px solid #e5d29a;border-left:4px solid var(--gold);font-size:11px;color:#5d4e27}.err{padding:12px;background:#fff3f3;border:1px solid #e4baba;color:var(--red);font-size:11px;border-radius:5px}
+.footer{background:var(--nav);color:#b9cada;padding:20px 0;font-size:10px;line-height:1.6}.footer a{color:#fff}
+@media(max-width:900px){.cards{grid-template-columns:repeat(3,1fr)}.layout{grid-template-columns:1fr}.map{height:330px}}
+@media(max-width:600px){.cards{grid-template-columns:repeat(2,1fr)}.headin{min-height:78px}.seal{width:46px;height:46px;font-size:14px}h1{font-size:19px}.live{display:none}.map{height:310px}}
+</style>
+</head>
+<body>
+<div class="gov"><div class="wrap"><span>REPÚBLICA FEDERATIVA DO BRASIL</span><span>PAINEL DE ACOMPANHAMENTO ELEITORAL</span></div></div>
+<header class="head"><div class="wrap headin"><div class="seal">EB</div><div><h1>Eleições Brasileiras 2026</h1><div class="subtitle">Acompanhamento da totalização • informações de divulgação eleitoral</div></div><div class="live" id="live"><i></i>ATUALIZAÇÃO AUTOMÁTICA</div></div></header>
+<nav class="nav"><div class="wrap navin"><button class="tab active" data-page="presidente">Presidente</button><button class="tab" data-page="governador">Governador</button><button class="tab" data-page="senador">Senador</button></div></nav>
+
+<main class="wrap">
+<div class="toprow"><div><h2 id="title">Presidente da República</h2><p id="subtitle">Brasil • dados oficiais de divulgação do TSE</p></div><div class="controls"><select id="uf"></select><select id="interval"><option value="5000">5 segundos</option><option value="10000">10 segundos</option><option value="15000" selected>15 segundos</option><option value="30000">30 segundos</option></select><button id="refresh">Atualizar agora</button></div></div>
+
+<div class="notice"><b>Fonte:</b> Tribunal Superior Eleitoral. O TSE informa que os dados são atualizados à medida que os boletins de urna são recebidos e processados.</div>
+
+<div class="cards">
+<div class="card metric"><div class="label">Seções totalizadas</div><div class="num" id="sections">—</div><div class="sub" id="sectionsPct">—</div></div>
+<div class="card metric"><div class="label">Votos válidos</div><div class="num" id="valid">—</div><div class="sub" id="validPct">—</div></div>
+<div class="card metric"><div class="label">Votos brancos</div><div class="num" id="blank">—</div><div class="sub" id="blankPct">—</div></div>
+<div class="card metric"><div class="label">Votos nulos</div><div class="num" id="nulls">—</div><div class="sub" id="nullPct">—</div></div>
+<div class="card metric"><div class="label">Abstenções</div><div class="num" id="abs">—</div><div class="sub" id="absPct">—</div></div>
+</div>
+
+<div class="layout">
+<section class="card panel"><div class="panelhead"><h3>Mapa do Brasil</h3><span class="badge" id="mapStatus">SELECIONE UMA UF</span></div><div class="mapbox"><div class="map" id="map"><div class="brazil"></div></div><div class="legend">Clique em uma UF para consultar Governador ou Senador. Em Presidente, o resultado é nacional.</div></div></section>
+<section class="card panel"><div class="resulthead"><h3 id="resultTitle">Apuração</h3><span class="badge" id="badge">CONSULTANDO</span></div><div id="table" style="margin-top:5px"></div></section>
+</div>
+</main>
+
+<footer class="footer"><div class="wrap"><b>Eleições Brasileiras 2026</b><br>Painel independente de visualização. Os dados eleitorais são de responsabilidade do Tribunal Superior Eleitoral.<br><br><a href="https://resultados.tse.jus.br/" target="_blank">Acessar o portal oficial Resultados do TSE</a></div></footer>
+
+<script>
+const FED="6257",EST="6259";
+const UFS={AC:"Acre",AL:"Alagoas",AP:"Amapá",AM:"Amazonas",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",ES:"Espírito Santo",GO:"Goiás",MA:"Maranhão",MT:"Mato Grosso",MS:"Mato Grosso do Sul",MG:"Minas Gerais",PA:"Pará",PB:"Paraíba",PR:"Paraná",PE:"Pernambuco",PI:"Piauí",RJ:"Rio de Janeiro",RN:"Rio Grande do Norte",RS:"Rio Grande do Sul",RO:"Rondônia",RR:"Roraima",SC:"Santa Catarina",SP:"São Paulo",SE:"Sergipe",TO:"Tocantins"};
+const pos={AC:[25,18],RR:[25,29],AP:[42,14],AM:[30,34],PA:[50,27],MA:[68,32],CE:[79,34],RN:[89,31],PB:[88,38],PE:[84,43],AL:[82,49],SE:[78,54],PI:[68,43],TO:[58,45],RO:[31,57],AC2:[25,18],MT:[45,58],GO:[57,59],DF:[61,55],BA:[72,56],MG:[65,69],ES:[79,69],RJ:[77,78],SP:[61,79],PR:[54,87],SC:[55,94],RS:[45,97],MS:[43,78]};
+const uf=document.querySelector("#uf");for(const [s,n] of Object.entries(UFS)){let o=document.createElement("option");o.value=s.toLowerCase();o.textContent=`${s} — ${n}`;if(s==="BA")o.selected=true;uf.appendChild(o)}
+const map=document.querySelector("#map");for(const s of Object.keys(UFS)){let d=document.createElement("button");d.className="state";d.textContent=s;d.dataset.uf=s.toLowerCase();let q=pos[s]||[50,50];d.style.left=q[0]+"%";d.style.top=q[1]+"%";d.onclick=()=>{uf.value=d.dataset.uf;document.querySelectorAll(".state").forEach(x=>x.classList.remove("sel"));d.classList.add("sel");if(page!=="presidente")load()};map.appendChild(d)}
+let page="presidente",busy=false,timer;const proxy=u=>"https://proxy.cors.dev/"+u;
+function url(){let u=uf.value;if(page==="presidente")return `https://resultados.tse.jus.br/oficial/ele2026/${FED}/dados/br/br-c0001-e006257-u.json`;if(page==="governador")return `https://resultados.tse.jus.br/oficial/ele2026/${EST}/dados/${u}/${u}-c0003-e006259-u.json`;return `https://resultados.tse.jus.br/oficial/ele2026/${EST}/dados/${u}/${u}-c0005-e006259-u.json`}
+async function getJSON(u){let last="";for(let x of [proxy(u),u])try{let r=await fetch(x,{cache:"no-store"});if(!r.ok){last="HTTP "+r.status;continue}return await r.json()}catch(e){last=e.message}throw Error(last||"falha de rede")}
+function n(v){if(typeof v==="number")return v;if(v==null)return null;let s=String(v).replace(/[^\d-]/g,"");return s?+s:null}
+function rows(o){let a=[],seen=new Set();function w(x){if(!x||typeof x!=="object"||seen.has(x))return;seen.add(x);if(Array.isArray(x)){x.forEach(w);return}let k=Object.keys(x),l=k.map(z=>z.toLowerCase()),nk=l.find(z=>["nm","nome","nmu","nomeurna","nomeur","name"].includes(z)),vk=l.find(z=>["vap","votos","voto","qtv","votosnominais"].includes(z));if(nk&&vk){let name=x[k[l.indexOf(nk)]],votes=n(x[k[l.indexOf(vk)]]);if(typeof name==="string"&&name.trim()&&votes!=null)a.push({name:name.trim(),votes})}Object.values(x).forEach(w)}w(o);let m=new Map();a.forEach(r=>{if(!m.has(r.name)||m.get(r.name).votes<r.votes)m.set(r.name,r)});return[...m.values()].sort((a,b)=>b.votes-a.votes)}
+function fmt(v){return v==null?"—":Number(v).toLocaleString("pt-BR")}
+function find(o,keys){let found=null;function w(x){if(found!=null||!x||typeof x!=="object")return;if(Array.isArray(x)){x.forEach(w);return}for(let [k,v] of Object.entries(x)){let z=k.toLowerCase();if(keys.includes(z)){let q=n(v);if(q!=null){found=q;return}}if(typeof v==="object")w(v)}}w(o);return found}
+function stats(o){let s=find(o,["sct","secoesapuradas","secoes","secoesprocessadas","qtsecoes"]),t=find(o,["st","stot","totalvotos","votostotalizados"]),v=find(o,["vv","votosvalidos","validos"]),b=find(o,["vb","votosbrancos","brancos"]),z=find(o,["vn","votosnulos","nulos"]),a=find(o,["ab","abstencoes","abstencao"]);return{s,t,v,b,z,a}}
+function render(a){let mx=a[0]?.votes||1;if(!a.length){table.innerHTML='<div class="err">O TSE respondeu, mas não foi possível identificar as candidaturas neste arquivo.</div>';return}table.innerHTML=`<table><thead><tr><th>#</th><th>Candidata(o)</th><th class="r">Votos</th><th class="r">%</th></tr></thead><tbody>${a.slice(0,30).map((r,i)=>{let p=r.votes/mx*100;return `<tr><td>${i+1}</td><td><span class="name">${esc(r.name)}</span><div class="bar"><i style="width:${Math.max(1,Math.min(100,p))}%"></i></div></td><td class="r">${fmt(r.votes)}</td><td class="r"><b>${p.toFixed(2)}%</b></td></tr>`}).join("")}</tbody></table><div style="font-size:9px;color:#687887;margin-top:9px">O percentual mostrado na coluna é relativo ao maior total identificado neste arquivo. Os percentuais oficiais de votos válidos devem ser obtidos do campo correspondente do TSE.</div>`}
+function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function putStats(x){let s=stats(x);sections.textContent=fmt(s.s);valid.textContent=fmt(s.v);blank.textContent=fmt(s.b);nulls.textContent=fmt(s.z);abs.textContent=fmt(s.a);let base=s.t||((s.v||0)+(s.b||0)+(s.z||0));sectionsPct.textContent=s.s?"Totalizadas":"—";validPct.textContent=s.v&&base?((s.v/base)*100).toFixed(2)+"% do total":"";blankPct.textContent=s.b&&base?((s.b/base)*100).toFixed(2)+"% do total":"";nullPct.textContent=s.z&&base?((s.z/base)*100).toFixed(2)+"% do total":"";absPct.textContent=s.a?"Eleitorado não comparecente":""}
+async function load(){if(busy)return;busy=true;badge.textContent="CONSULTANDO";try{let data=await getJSON(url());let a=rows(data);render(a);putStats(data);situation="ATUALIZADO";badge.textContent="DADOS RECEBIDOS";live.innerHTML="<i></i>ATIVO";document.querySelector("#mapStatus").textContent=page==="presidente"?"BRASIL":uf.value.toUpperCase();}catch(e){table.innerHTML=`<div class="err"><b>Falha na consulta:</b> ${esc(e.message)}</div>`;badge.textContent="FALHA";live.innerHTML="<i></i>AGUARDANDO"}finally{busy=false}}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");page=b.dataset.page;title.textContent=page==="presidente"?"Presidente da República":page==="governador"?"Governador":"Senador";subtitle.textContent=page==="presidente"?"Brasil • dados oficiais de divulgação do TSE":`${UFS[uf.value.toUpperCase()]} • dados oficiais de divulgação do TSE`;load()});
+uf.onchange=()=>{if(page!=="presidente")load()};refresh.onclick=load;interval.onchange=()=>{clearInterval(timer);timer=setInterval(load,+interval.value)};load();timer=setInterval(load,+interval.value);
+</script>
+</body></html>
